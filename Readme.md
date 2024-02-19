@@ -1,4 +1,5 @@
-# Project Name
+# Nextjs Full Stack
+
 
 ## Next.js Full Stack Project with MySQL, Sequelize, Axios, MUI, Bcrypt, Body-parser, Cors
 
