@@ -1,0 +1,17 @@
+node_modules
+build
+yarn.lock
+yarn-error.log
+.env*
+public/PDFs
+public/uploads
+
+.vscode/launch.json
+.vscode/settings.json
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+.ebextensions/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+.DS_store
