@@ -5,7 +5,7 @@ import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
+import { blue, red } from "@mui/material/colors";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -41,12 +41,19 @@ export default function Home() {
   };
 
   return (
-    <>
+    <div
+      style={{
+        display: "grid",
+      }}
+    >
       <div
         style={{
           display: "grid",
+          justifySelf: "center",
+          alignSelf: "center",
           gridTemplateColumns: "repeat(4, 345px)",
-          gap: "10px",
+          gap: "20px",
+          margin: "50px 0 0 0",
         }}
         className="cardContainer"
       >
@@ -54,10 +61,17 @@ export default function Home() {
           return (
             <>
               <div>
-                <Card key={post.id} sx={{ maxWidth: 345 }}>
+                <Card
+                  key={post.id}
+                  sx={{ maxWidth: 345, maxHeight: 350, minHeight: 300 }}
+                  style={{
+                    background:
+                      "linear-gradient(to top left, #dfe9f3 0%, white 100%)",
+                  }}
+                >
                   <CardHeader
                     avatar={
-                      <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                      <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
                         {post.userName.slice(0, 1).toUpperCase()}
                       </Avatar>
                     }
@@ -65,7 +79,15 @@ export default function Home() {
                     subheader={formatCreatedAt(post.createdAt)}
                   />
                   <CardContent>
-                    <Typography variant="body2" color="text.primary">
+                    <Typography
+                      variant="body2"
+                      color="text.primary"
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: "18px",
+                        color: "#0a2351",
+                      }}
+                    >
                       {post.title}
                     </Typography>
                   </CardContent>
@@ -80,6 +102,6 @@ export default function Home() {
           );
         })}
       </div>
-    </>
+    </div>
   );
 }
