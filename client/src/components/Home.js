@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import { blue } from "@mui/material/colors";
 import { Rubik } from "next/font/google";
 
-const customFont = Rubik({ subsets: ["cyrillic"] });
+const customFont = Rubik({ subsets: ["arabic"] });
 
 export default function Home() {
   const [listOFPosts, setListOFPosts] = useState([]);
@@ -38,8 +38,23 @@ export default function Home() {
       <div
         style={{
           display: "grid",
+          justifySelf: "center",
+          alignSelf: "center",
         }}
       >
+        <h1
+          style={{
+            fontWeight: "700",
+            fontSize: "36px",
+            display: "grid",
+            justifySelf: "center",
+            alignSelf: "center",
+            color: "#13274F",
+          }}
+        >
+          Read Articles of your Choice !
+        </h1>
+
         <div
           style={{
             display: "grid",
@@ -77,7 +92,7 @@ export default function Home() {
                         variant="body2"
                         color="text.primary"
                         style={{
-                          fontWeight: "bold",
+                          fontWeight: "600",
                           fontSize: "18px",
                           color: "#0a2351",
                         }}
