@@ -8,6 +8,7 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { blue } from "@mui/material/colors";
 import { Rubik } from "next/font/google";
+import Link from "next/link";
 
 const customFont = Rubik({ subsets: ["cyrillic"] });
 
@@ -66,43 +67,49 @@ export default function Home() {
           {listOFPosts.map((post) => {
             return (
               <>
-                <Card
-                  key={post.id}
-                  sx={{ maxWidth: 345, maxHeight: 350, minHeight: 300 }}
-                  style={{
-                    background:
-                      "linear-gradient(to top left, #dfe9f3 0%, white 100%)",
-                    position: "relative",
-                  }}
+                <Link
+                  href={`/post/${post.id}`}
+                  style={{ textDecoration: "none" }}
                 >
-                  <CardHeader
-                    avatar={
-                      <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
-                        {post.userName.slice(0, 1).toUpperCase()}
-                      </Avatar>
-                    }
-                    title={post.userName}
-                    subheader={formatCreatedAt(post.createdAt)}
-                  />
-                  <CardContent>
-                    <Typography
-                      variant="body2"
-                      color="text.primary"
-                      style={{
-                        fontWeight: "600",
-                        fontSize: "18px",
-                        color: "#0a2351",
-                      }}
-                    >
-                      {post.title}
-                    </Typography>
-                  </CardContent>
-                  <CardContent>
-                    <Typography variant="body2" color="text.secondary">
-                      {post.postData}
-                    </Typography>
-                  </CardContent>
-                </Card>
+                  <Card
+                    key={post.id}
+                    sx={{ maxWidth: 345, maxHeight: 350, minHeight: 300 }}
+                    style={{
+                      background:
+                        "linear-gradient(to top left, #dfe9f3 0%, white 100%)",
+                      position: "relative",
+                      fontFamily: "inherit",
+                    }}
+                  >
+                    <CardHeader
+                      avatar={
+                        <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
+                          {post.userName.slice(0, 1).toUpperCase()}
+                        </Avatar>
+                      }
+                      title={post.userName}
+                      subheader={formatCreatedAt(post.createdAt)}
+                    />
+                    <CardContent>
+                      <Typography
+                        variant="body2"
+                        color="text.primary"
+                        style={{
+                          fontWeight: "600",
+                          fontSize: "18px",
+                          color: "#0a2351",
+                        }}
+                      >
+                        {post.title}
+                      </Typography>
+                    </CardContent>
+                    <CardContent>
+                      <Typography variant="body2" color="text.secondary">
+                        {post.postData}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Link>
               </>
             );
           })}

@@ -17,6 +17,7 @@ export default function App({ Component, pageProps }) {
         position="static"
         style={{
           background: "linear-gradient(to top right, #0a2351 0%, #13274F 100%)",
+          zIndex: "999",
         }}
       >
         <Toolbar>
