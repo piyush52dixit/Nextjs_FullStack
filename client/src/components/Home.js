@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import { blue } from "@mui/material/colors";
 import { Rubik } from "next/font/google";
 
-const customFont = Rubik({ subsets: ["arabic"] });
+const customFont = Rubik({ subsets: ["cyrillic"] });
 
 export default function Home() {
   const [listOFPosts, setListOFPosts] = useState([]);
@@ -20,9 +20,6 @@ export default function Home() {
     });
   }, []);
 
-  if (listOFPosts.length === 0) {
-    return <p>Loading...</p>;
-  }
   const formatCreatedAt = (createdAt) => {
     return new Date(createdAt).toLocaleString(undefined, {
       year: "numeric",
@@ -69,44 +66,43 @@ export default function Home() {
           {listOFPosts.map((post) => {
             return (
               <>
-                <div>
-                  <Card
-                    key={post.id}
-                    sx={{ maxWidth: 345, maxHeight: 350, minHeight: 300 }}
-                    style={{
-                      background:
-                        "linear-gradient(to top left, #dfe9f3 0%, white 100%)",
-                    }}
-                  >
-                    <CardHeader
-                      avatar={
-                        <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
-                          {post.userName.slice(0, 1).toUpperCase()}
-                        </Avatar>
-                      }
-                      title={post.userName}
-                      subheader={formatCreatedAt(post.createdAt)}
-                    />
-                    <CardContent>
-                      <Typography
-                        variant="body2"
-                        color="text.primary"
-                        style={{
-                          fontWeight: "600",
-                          fontSize: "18px",
-                          color: "#0a2351",
-                        }}
-                      >
-                        {post.title}
-                      </Typography>
-                    </CardContent>
-                    <CardContent>
-                      <Typography variant="body2" color="text.secondary">
-                        {post.postData}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </div>
+                <Card
+                  key={post.id}
+                  sx={{ maxWidth: 345, maxHeight: 350, minHeight: 300 }}
+                  style={{
+                    background:
+                      "linear-gradient(to top left, #dfe9f3 0%, white 100%)",
+                    position: "relative",
+                  }}
+                >
+                  <CardHeader
+                    avatar={
+                      <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
+                        {post.userName.slice(0, 1).toUpperCase()}
+                      </Avatar>
+                    }
+                    title={post.userName}
+                    subheader={formatCreatedAt(post.createdAt)}
+                  />
+                  <CardContent>
+                    <Typography
+                      variant="body2"
+                      color="text.primary"
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "18px",
+                        color: "#0a2351",
+                      }}
+                    >
+                      {post.title}
+                    </Typography>
+                  </CardContent>
+                  <CardContent>
+                    <Typography variant="body2" color="text.secondary">
+                      {post.postData}
+                    </Typography>
+                  </CardContent>
+                </Card>
               </>
             );
           })}

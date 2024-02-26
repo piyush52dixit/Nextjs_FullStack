@@ -3,20 +3,22 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Rubik } from "next/font/google";
+import axios from "axios";
+import { CircularProgress } from "@mui/material";
 
 const customFont = Rubik({ subsets: ["cyrillic"] });
 
 const CreatePost = () => {
   const [formData, setFormData] = useState({
     title: "",
-    description: "",
-    username: "",
+    postData: "",
+    userName: "",
   });
   const [loading, setLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({
     title: "",
-    description: "",
-    username: "",
+    postData: "",
+    userName: "",
   });
 
   const handleInputChange = (e) => {
@@ -39,16 +41,16 @@ const CreatePost = () => {
       errors.title = "Title is required";
     }
 
-    if (formData.description.trim() === "") {
-      errors.description = "Description is required";
-    } else if (formData.description.trim().length < 50) {
-      errors.description = "Description must be 50 words Long";
+    if (formData.postData.trim() === "") {
+      errors.postData = "Description is required";
+    } else if (formData.postData.trim().length < 50) {
+      errors.postData = "Description must be 50 words Long";
     }
 
-    if (formData.username.trim() === "") {
-      errors.username = "Username is required";
-    } else if (formData.username.includes(" ")) {
-      errors.username = "Username should not have spaces";
+    if (formData.userName.trim() === "") {
+      errors.userName = "Username is required";
+    } else if (formData.userName.includes(" ")) {
+      errors.userName = "Username should not have spaces";
     }
 
     setValidationErrors(errors);
@@ -67,16 +69,14 @@ const CreatePost = () => {
     setLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      console.log("Form submitted:", formData);
+      await axios.post("http://localhost:5555/posts", formData);
     } catch (error) {
       console.error("Error submitting form:", error);
     } finally {
       setLoading(false);
     }
 
-    setFormData({ title: "", description: "", username: "" });
+    setFormData({ title: "", postData: "", userName: "" });
   };
 
   return (
@@ -121,22 +121,22 @@ const CreatePost = () => {
             multiline
             rows={6}
             margin="normal"
-            name="description"
-            value={formData.description}
+            name="postData"
+            value={formData.postData}
             onChange={handleInputChange}
-            error={Boolean(validationErrors.description)}
-            helperText={validationErrors.description}
+            error={Boolean(validationErrors.postData)}
+            helperText={validationErrors.postData}
           />
           <TextField
             label="Username"
             variant="outlined"
             fullWidth
             margin="normal"
-            name="username"
-            value={formData.username}
+            name="userName"
+            value={formData.userName}
             onChange={handleInputChange}
-            error={Boolean(validationErrors.username)}
-            helperText={validationErrors.username}
+            error={Boolean(validationErrors.userName)}
+            helperText={validationErrors.userName}
           />
           <Button
             variant="contained"
@@ -148,8 +148,9 @@ const CreatePost = () => {
               background:
                 "linear-gradient(to top right, #0a2351 0%, #13274F 100%)",
             }}
+            disabled={loading}
           >
-            Submit
+            {loading ? <CircularProgress /> : "Submit"}
           </Button>
         </form>
       </div>
