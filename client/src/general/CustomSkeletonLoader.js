@@ -23,8 +23,8 @@ const CustomSkeletonLoader = (props) => {
       <div
         style={{
           display: "grid",
-          justifySelf: "center",
-          alignSelf: "center",
+          justifySelf: `${props.justifySelf} || center`,
+          alignSelf: `${props.alignSelf} || center`,
           gridTemplateColumns: `repeat(${props.gridTemplateColumnsNum}, 345px)`,
           gap: "20px",
           margin: `${props.margin}`,

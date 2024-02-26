@@ -5,6 +5,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { Rubik } from "next/font/google";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
+import { useRouter } from "next/router";
 
 const customFont = Rubik({ subsets: ["cyrillic"] });
 
@@ -14,6 +15,9 @@ const CreatePost = () => {
     postData: "",
     userName: "",
   });
+
+  const router = useRouter();
+
   const [loading, setLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({
     title: "",
@@ -70,6 +74,7 @@ const CreatePost = () => {
 
     try {
       await axios.post("http://localhost:5555/posts", formData);
+      router.push("/");
     } catch (error) {
       console.error("Error submitting form:", error);
     } finally {
