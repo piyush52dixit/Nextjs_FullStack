@@ -7,6 +7,9 @@ import ImageSection from "./ImageSection";
 import DDMonthNameYYTime from "@/general/DDMonthNameYYTime";
 import img from "../../public/work.svg";
 import styles from "./SingleExpandedPost.module.css"; // Import CSS Modules
+import { Rubik } from "next/font/google";
+
+const customFont = Rubik({ subsets: ["cyrillic"] });
 
 export const API_BASE_URL = "http://localhost:5555";
 
@@ -62,7 +65,7 @@ const SingleExpandedPost = ({ id }) => {
   };
 
   return (
-    <div className={styles.container}>
+    <div style={customFont.style}>
       <div className={styles.flexContainer}>
         <div className={styles.postContent}>
           <CardContent>

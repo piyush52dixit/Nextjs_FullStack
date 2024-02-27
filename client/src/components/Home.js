@@ -6,10 +6,10 @@ import CardContent from "@mui/material/CardContent";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { blue } from "@mui/material/colors";
-import { Rubik } from "next/font/google";
 import Link from "next/link";
 import DDMonthNameYYTime from "@/general/DDMonthNameYYTime";
 import { API_BASE_URL } from "./SingleExpandedPost";
+import { Rubik } from "next/font/google";
 
 const customFont = Rubik({ subsets: ["cyrillic"] });
 
