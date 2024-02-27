@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
@@ -9,112 +8,104 @@ import Typography from "@mui/material/Typography";
 import { blue } from "@mui/material/colors";
 import { Rubik } from "next/font/google";
 import Link from "next/link";
+import DDMonthNameYYTime from "@/general/DDMonthNameYYTime";
+import { API_BASE_URL } from "./SingleExpandedPost";
 
 const customFont = Rubik({ subsets: ["cyrillic"] });
 
-export default function Home() {
+const Home = () => {
   const [listOFPosts, setListOFPosts] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5555/posts").then((response) => {
-      setListOFPosts(response.data);
-    });
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/posts`);
+        setListOFPosts(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  const formatCreatedAt = (createdAt) => {
-    return new Date(createdAt).toLocaleString(undefined, {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-    });
-  };
+    fetchData();
+  }, []);
 
   return (
     <div style={customFont.style}>
       <div
         style={{
           display: "grid",
-          justifySelf: "center",
-          alignSelf: "center",
+          placeItems: "center",
         }}
       >
         <h1
           style={{
             fontWeight: "700",
             fontSize: "36px",
-            display: "grid",
-            justifySelf: "center",
-            alignSelf: "center",
             color: "#13274F",
+            marginBottom: "50px",
           }}
         >
-          Read Articles of your Choice !
+          Read Articles of your Choice!
         </h1>
 
         <div
           style={{
             display: "grid",
-            justifySelf: "center",
-            alignSelf: "center",
             gridTemplateColumns: "repeat(4, 345px)",
             gap: "20px",
-            margin: "50px 0 0 0",
           }}
           className="cardContainer"
         >
-          {listOFPosts.map((post) => {
-            return (
-              <>
-                <Link
-                  href={`/post/${post.id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Card
-                    key={post.id}
-                    sx={{ maxWidth: 345, maxHeight: 350, minHeight: 300 }}
-                    style={{
-                      background:
-                        "linear-gradient(to top left, #dfe9f3 0%, white 100%)",
-                      position: "relative",
-                      fontFamily: "inherit",
+          {listOFPosts.map((post) => (
+            <Link
+              href={`/post/${post.id}`}
+              key={post.id}
+              passHref
+              style={{ textDecoration: "none" }}
+            >
+              <Card
+                sx={{ maxWidth: 345, maxHeight: 350, minHeight: 300 }}
+                style={{
+                  background:
+                    "linear-gradient(to top left, #dfe9f3 0%, white 100%)",
+                  position: "relative",
+                  fontFamily: "inherit",
+                }}
+              >
+                <CardHeader
+                  avatar={
+                    <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
+                      {post.userName?.slice(0, 1).toUpperCase()}
+                    </Avatar>
+                  }
+                  title={post.userName}
+                  subheader={<DDMonthNameYYTime createdAt={post.createdAt} />}
+                />
+                <CardContent>
+                  <Typography
+                    variant="body2"
+                    color="text.primary"
+                    sx={{
+                      fontWeight: "600",
+                      fontSize: "18px",
+                      color: "#0a2351",
                     }}
                   >
-                    <CardHeader
-                      avatar={
-                        <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
-                          {post.userName.slice(0, 1).toUpperCase()}
-                        </Avatar>
-                      }
-                      title={post.userName}
-                      subheader={formatCreatedAt(post.createdAt)}
-                    />
-                    <CardContent>
-                      <Typography
-                        variant="body2"
-                        color="text.primary"
-                        style={{
-                          fontWeight: "600",
-                          fontSize: "18px",
-                          color: "#0a2351",
-                        }}
-                      >
-                        {post.title}
-                      </Typography>
-                    </CardContent>
-                    <CardContent>
-                      <Typography variant="body2" color="text.secondary">
-                        {post.postData}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </>
-            );
-          })}
+                    {post.title}
+                  </Typography>
+                </CardContent>
+                <CardContent>
+                  <Typography variant="body2" color="text.secondary">
+                    {post.postData}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Home;

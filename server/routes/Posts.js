@@ -1,9 +1,7 @@
-// In Posts.js
 const express = require("express");
 const router = express.Router();
 const { Posts } = require("../models");
 
-// Example route
 router.get("/", async (req, res) => {
   const listOFPosts = await Posts.findAll();
   res.json(listOFPosts);
