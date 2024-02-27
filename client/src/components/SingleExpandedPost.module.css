@@ -1,0 +1,57 @@
+/* SingleExpandedPost.module.css */
+
+.container {
+  font-family: "Rubik", sans-serif;
+}
+
+.flexContainer {
+  display: flex;
+  height: 100vh;
+}
+
+.postContent {
+  width: 100%;
+  min-height: 50%;
+  padding: 20px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 48px;
+  color: #0a2351;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 10px;
+  padding-bottom: 10px;
+}
+
+.userInfoDetails {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+}
+
+.userName {
+  font-size: 30px;
+}
+
+.date {
+  color: #495057;
+}
+
+.postData {
+  color: #1864ab;
+  font-size: 24px;
+  margin: 20px 0 0 0;
+  line-height: 40px;
+  letter-spacing: 0.3px;
+}
+
+.commentSection {
+  margin-left: 30px;
+}

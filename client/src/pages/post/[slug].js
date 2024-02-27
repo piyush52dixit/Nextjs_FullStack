@@ -11,7 +11,7 @@ const SingleExpandedPost = dynamic(
       <CustomSkeletonLoader
         width={900}
         height={500}
-        numSkeletons={1}
+        numSkeletons={2}
         gridTemplateColumnsNum={1}
         margin={"30px 0 0 -1500px"}
         justifySelf={"start"}
