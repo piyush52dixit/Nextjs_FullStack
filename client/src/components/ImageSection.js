@@ -9,7 +9,7 @@ const ImageSection = ({ img }) => {
       <div
         style={{
           width: "100vh",
-          background: "conic-gradient(from 135deg, #0022AD, #1C0964)",
+          background: "conic-gradient(from 135deg, #0022AD, #13274F)",
         }}
       >
         <Image src={img} alt="Example Image" width={820} height={500} />
