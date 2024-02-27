@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -22,7 +22,13 @@ const styledList = {
   minHeight: 60,
 };
 
-const CommentSection = ({ comment, newComment, addComment, setNewComment }) => {
+const CommentSection = ({
+  comment,
+  newComment,
+  addComment,
+  setNewComment,
+  error,
+}) => {
   return (
     <>
       <div
@@ -38,7 +44,10 @@ const CommentSection = ({ comment, newComment, addComment, setNewComment }) => {
         </p>
         <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
           <TextField
-            label={"  Add a comment..."}
+            error={error}
+            label={`${
+              error ? "comment can't be empty" : "Add your Comments..."
+            }`}
             variant="standard"
             sx={{ m: 0, width: "50ch" }}
             onChange={(event) => {

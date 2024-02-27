@@ -17,6 +17,7 @@ const SingleExpandedPost = ({ id }) => {
   const [data, setData] = useState({});
   const [comment, setComment] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,6 +52,10 @@ const SingleExpandedPost = ({ id }) => {
   }, [id]);
 
   const addComment = () => {
+    if (!newComment.trim()) {
+      setError(true);
+      return; // Exit the function if the comment is empty
+    }
     axios
       .post(`${API_BASE_URL}/comments`, {
         commentBody: newComment,
@@ -59,9 +64,14 @@ const SingleExpandedPost = ({ id }) => {
       .then((response) => {
         const newCommentToAdd = { commentBody: newComment };
         setComment([...comment, newCommentToAdd]);
+      })
+      .catch((error) => {
+        console.error("Error adding comment:", error);
+        setError(true);
       });
 
     setNewComment("");
+    setError(false);
   };
 
   return (
@@ -108,7 +118,7 @@ const SingleExpandedPost = ({ id }) => {
           </CardContent>
           <div className={styles.commentSection}>
             <CommentSection
-              {...{ comment, newComment, addComment, setNewComment }}
+              {...{ comment, newComment, addComment, setNewComment, error }}
             />
           </div>
         </div>
