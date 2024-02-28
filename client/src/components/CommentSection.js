@@ -4,6 +4,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
+import DDMonthNameYYTime from "@/general/DDMonthNameYYTime";
 
 const style = {
   py: 0,
@@ -67,7 +68,10 @@ const CommentSection = ({
             return (
               <>
                 <ListItem key={index} sx={styledList}>
-                  <ListItemText primary={`${cmt.commentBody}`} />
+                  <ListItemText
+                    primary={`${cmt.commentBody}`}
+                    secondary={<DDMonthNameYYTime createdAt={cmt.createdAt} />}
+                  />
                 </ListItem>
                 <Divider component="li" />
               </>
