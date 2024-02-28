@@ -7,7 +7,9 @@ import ImageSection from "./ImageSection";
 import DDMonthNameYYTime from "@/general/DDMonthNameYYTime";
 import img from "../../public/work.svg";
 import styles from "./SingleExpandedPost.module.css"; // Import CSS Modules
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Rubik } from "next/font/google";
+import Link from "next/link";
 
 const customFont = Rubik({ subsets: ["cyrillic"] });
 
@@ -78,6 +80,9 @@ const SingleExpandedPost = ({ id }) => {
     <div style={customFont.style}>
       <div className={styles.flexContainer}>
         <div className={styles.postContent}>
+          <Link href="/">
+            <ArrowBackIcon />
+          </Link>
           <CardContent>
             <Typography
               variant="body2"
