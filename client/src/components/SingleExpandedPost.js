@@ -43,7 +43,6 @@ const SingleExpandedPost = ({ id }) => {
         } else {
           console.log("Error");
         }
-        console.log("🚀 ~ fetchCommentData ~ response:", response.data);
       } catch (error) {
         console.log("🚀 ~ fetchData ~ error:", error);
       }
@@ -56,23 +55,35 @@ const SingleExpandedPost = ({ id }) => {
   const addComment = () => {
     if (!newComment.trim()) {
       setError(true);
-      return; // Exit the function if the comment is empty
+      return;
     }
     axios
-      .post(`${API_BASE_URL}/comments`, {
-        commentBody: newComment,
-        PostId: id,
-      })
+      .post(
+        `${API_BASE_URL}/comments`,
+        {
+          commentBody: newComment,
+          PostId: id,
+        },
+        {
+          headers: {
+            accessToken: sessionStorage.getItem("accessToken"),
+          },
+        }
+      )
       .then((response) => {
-        const newCommentToAdd = { commentBody: newComment };
-        setComment([...comment, newCommentToAdd]);
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          const newCommentToAdd = { commentBody: newComment };
+          setComment([...comment, newCommentToAdd]);
+          setNewComment("");
+        }
       })
       .catch((error) => {
         console.error("Error adding comment:", error);
         setError(true);
       });
 
-    setNewComment("");
     setError(false);
   };
 
