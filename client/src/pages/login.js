@@ -14,7 +14,7 @@ import { blue } from "@mui/material/colors";
 
 const customFont = Rubik({ subsets: ["cyrillic"] });
 
-const SignUp = () => {
+const Login = () => {
   const [formData, setFormData] = useState({
     userName: "",
     password: "",
@@ -73,9 +73,15 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(`${API_BASE_URL}/auth/login`, formData);
-      console.log(response);
+
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
+        sessionStorage.setItem("accessToken", response.data);
+        router.push("/");
+      }
     } catch (error) {
-      console.error("Error Onboarding User:", error);
+      console.error("Error Onboarding User:", error.response.data.error);
     } finally {
       setLoading(false);
     }
@@ -161,4 +167,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;
