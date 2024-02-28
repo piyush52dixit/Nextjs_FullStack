@@ -1,10 +1,19 @@
-import React, { useState } from "react";
-import { Button, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {
+  Avatar,
+  Button,
+  ListItemButton,
+  ListItemIcon,
+  TextField,
+} from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import DDMonthNameYYTime from "@/general/DDMonthNameYYTime";
+import InboxIcon from "@mui/icons-material/Inbox";
+
+import { blue } from "@mui/material/colors";
 
 const style = {
   py: 0,
@@ -68,9 +77,14 @@ const CommentSection = ({
             return (
               <>
                 <ListItem key={index} sx={styledList}>
+                  <ListItemIcon>
+                    <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
+                      {cmt.userName?.slice(0, 1).toUpperCase()}
+                    </Avatar>
+                  </ListItemIcon>
                   <ListItemText
+                    secondary={cmt.userName}
                     primary={`${cmt.commentBody}`}
-                    secondary={<DDMonthNameYYTime createdAt={cmt.createdAt} />}
                   />
                 </ListItem>
                 <Divider component="li" />

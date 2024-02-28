@@ -66,7 +66,7 @@ const SingleExpandedPost = ({ id }) => {
         },
         {
           headers: {
-            accessToken: sessionStorage.getItem("accessToken"),
+            accessToken: localStorage.getItem("accessToken"),
           },
         }
       )
@@ -74,7 +74,10 @@ const SingleExpandedPost = ({ id }) => {
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          const newCommentToAdd = { commentBody: newComment };
+          const newCommentToAdd = {
+            commentBody: newComment,
+            userName: response.data.userName,
+          };
           setComment([...comment, newCommentToAdd]);
           setNewComment("");
         }

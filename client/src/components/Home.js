@@ -35,6 +35,7 @@ const Home = () => {
         style={{
           display: "grid",
           placeItems: "center",
+          padding: "20px",
         }}
       >
         <h1
