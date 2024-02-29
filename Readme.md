@@ -1,6 +1,6 @@
 Certainly! Here is an updated README with the JWT authentication included:
 
-```markdown
+
 # Nextjs Full Stack with JWT Authentication
 
 ## Next.js Full Stack Project with MySQL, Sequelize, Axios, MUI, Bcrypt, Body-parser, Cors, and JWT Authentication
